@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "TODO",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,13 @@
   "homepage": "https://github.com/somi92/funky#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-uglify": "^2.0.0"
+    "gulp-concat": "^2.6.1",
+    "gulp-sequence": "^0.4.6",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "jest-cli": "^17.0.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
