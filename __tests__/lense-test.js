@@ -42,4 +42,8 @@ describe("testing lense", () => {
         var nestedPropertyLense = Lense.prop(["prop3", "prop32", "prop322", "prop3221"]);
         expect(Lense.read(nestedPropertyLense, testObj)).toBe("value3221");
     });
+
+    it("writes to an object through property lense", () => {
+        expect(true).toBe(false);
+    });
 });
