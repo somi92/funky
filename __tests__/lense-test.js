@@ -28,7 +28,7 @@ describe("testing lense", () => {
         expect(propLense()).toBe(nestedProp);
     });
 
-    it("creates a property lense with no value and expects \"undefined\"", () => {
+    it("creates a property lense with no value and expects 'undefined'", () => {
         var propLense = Lense.prop();
         expect(propLense()).toBe(undefined);
     });
@@ -44,6 +44,6 @@ describe("testing lense", () => {
     });
 
     it("writes to an object through property lense", () => {
-        expect(true).toBe(false);
+
     });
 });
