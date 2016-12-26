@@ -1,4 +1,4 @@
-var Util = (function () {
+var Futil = (function () {
 
     var isObject = (item) => {
         return (item !== undefined && item !== null && typeof item === 'object' && !Array.isArray(item));
@@ -15,4 +15,4 @@ var Util = (function () {
 
 })();
 
-module.exports = Util;
+module.exports = Futil;

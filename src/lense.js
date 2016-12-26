@@ -1,24 +1,32 @@
+const Futil = require("futil");
+
+/**
+ * 
+ */
 var Lense = (function () {
 
-    var prop = function (propName) {
+    var prop = (propName) => {
         return function () {
             return propName;
         };
     };
 
-    var read = function (propLense, obj) {
+    var read = (propLense, obj) => {
         var lense = propLense();
+        var objClone = Futil.deepClone(obj);
         if (!Array.isArray(lense))
-            return obj[lense];
-        propLense().forEach(function (prop) {
-            if (typeof (obj) === 'object')
-                obj = obj[prop];
+            return objClone[lense];
+        lense.some((prop) => {
+            var isObject = Futil.isObject(objClone);
+            if (isObject)
+                objClone = objClone[prop];
+            return !isObject;
         });
-        return obj;
+        return objClone;
     }
 
-    var write = function (propLense, obj, value) {
-
+    var write = (propLense, obj, value) => {
+        
     }
 
     return {
