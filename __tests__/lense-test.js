@@ -1,4 +1,4 @@
-const Lense = require("../src/lense");
+import * as Lense from "../src/lense";
 
 const testObj = {
     prop1: "value1",

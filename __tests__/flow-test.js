@@ -1,4 +1,4 @@
-const Flow = require("../src/flow");
+import * as Flow from "../src/flow";
 
 describe("testing flow", () => {
     it("creates identity lense and evaluates it", () => {

@@ -1,33 +1,19 @@
-var Flow = (function () {
+export function id(obj) {
+    return obj;
+}
 
-    var id = function (obj) {
-        return obj;
-    };
+export function tap() {
 
-    var tap = function () {
+}
 
-    };
+export function alt() {
 
-    var alt = function () {
+}
 
-    };
+export function seq() {
 
-    var seq = function () {
+}
 
-    };
+export function fork() {
 
-    var fork = function () {
-
-    };
-
-    return {
-        id: id,
-        tap: tap,
-        alt: alt,
-        seq: seq,
-        fork: fork
-    }
-
-})();
-
-module.exports = Flow;
+}
