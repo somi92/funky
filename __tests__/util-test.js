@@ -92,7 +92,6 @@ describe("testing util", () => {
             expect(clone).toEqual(complexArr);
         });
 
-        // TODO: test undefined clone
         it("clones undefined", () => {
             const clone = Futil.deepClone(undefined);
             expect(clone).toEqual(undefined);
