@@ -1,4 +1,4 @@
-const Futil = require("../src/futil");
+import * as Futil from "../src/futil";
 
 describe("testing util", () => {
 

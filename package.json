@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/somi92/funky#readme",
   "devDependencies": {
+    "babel-jest": "^18.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-sequence": "^0.4.6",
@@ -24,6 +25,7 @@
     "jest-cli": "^17.0.3"
   },
   "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "testEnvironment": "node",
     "modulePaths": ["<rootDir>/src/"]
   }
