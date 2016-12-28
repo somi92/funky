@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 var Futil = (function () {
 
     var isObject = (item) => {
@@ -5,6 +8,8 @@ var Futil = (function () {
     };
 
     var deepClone = (obj) => {
+        if (obj === undefined || obj === null)
+            return undefined;
         return JSON.parse(JSON.stringify(obj));
     };
 

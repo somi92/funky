@@ -1,7 +1,7 @@
 {
   "name": "funky",
   "version": "0.0.1",
-  "description": "TODO",
+  "description": "Playing around with some functional programming concepts in JavaScript",
   "scripts": {
     "test": "jest --no-cache --verbose"
   },
