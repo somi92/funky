@@ -46,8 +46,10 @@ describe("testing lense", () => {
     });
 
     it("reads an object through incorrect lense and returns 'undefined'", () => {
-        var nestedPropertyLense = Lense.prop(["prop3", "prop33"]);
-        expect(Lense.read(nestedPropertyLense, testObj)).toBe(undefined);
+        var nestedPropertyLense1 = Lense.prop("prop44");
+        var nestedPropertyLense2 = Lense.prop(["prop3", "prop33"]);
+        expect(Lense.read(nestedPropertyLense1, testObj)).toBe(undefined);
+        expect(Lense.read(nestedPropertyLense2, testObj)).toBe(undefined);
     });
 
     it("checks that reading operation returns new instance", () => {
@@ -57,6 +59,22 @@ describe("testing lense", () => {
     });
 
     it("writes to an object through property lense", () => {
+        var propLense = Lense.prop("prop1");
+        expect(Lense.write(propLense, testObj, "newValue1")["prop1"]).toEqual("newValue1");
+    });
 
+    it("writes to an object through nested property lense", () => {
+        var nestedPropertyLense1 = Lense.prop(["prop3", "prop32", "prop322", "prop3221"]);
+        var nestedPropertyLense2 = Lense.prop(["prop3", "prop32"]);
+        var newObject = {
+            newProp321: "newValue321",
+            newProp322: {
+                newProp3221: "newValue3221"
+            }
+        };
+        expect(Lense.write(nestedPropertyLense1, testObj, 
+            "newValue3221")["prop3"]["prop32"]["prop322"]["prop3221"]).toEqual("newValue3221");
+        expect(Lense.write(nestedPropertyLense2, testObj, 
+            newObject)["prop3"]["prop32"]).toEqual(newObject);
     });
 });
