@@ -36,6 +36,10 @@ gulp.task('clean', function () {
     del('dist/**', { force: true });
 });
 
+gulp.task('watch', function () {
+    gulp.watch('{src/*.js,test/*.js}', ['test']);
+});
+
 gulp.task('build-dev', sequence('test'));
 gulp.task('build-dist', sequence('clean', 'test', 'scripts'));
 
