@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Playing around with some functional programming concepts in JavaScript",
   "scripts": {
-    "test": "jest --no-cache --verbose"
+    "test": "mocha --opts mocha.opts"
   },
   "repository": {
     "type": "git",
@@ -16,21 +16,26 @@
   },
   "homepage": "https://github.com/somi92/funky#readme",
   "devDependencies": {
-    "babel-jest": "^18.0.0",
+    "babel-core": "^6.21.0",
     "babel-preset-es2015": "^6.18.0",
+    "chai": "^3.5.0",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
+    "gulp-mocha": "^3.0.1",
     "gulp-sequence": "^0.4.6",
+    "gulp-sourcemaps": "^1.9.1",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
-    "jest-cli": "^17.0.3"
+    "mocha": "^3.2.0"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
-    },
-    "transformIgnorePatterns": ["<rootDir>/node_modules/"],
-    "testEnvironment": "node",
-    "modulePaths": ["<rootDir>/src/"]
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "ignore": [
+      "node_modules/"
+    ]
   }
 }

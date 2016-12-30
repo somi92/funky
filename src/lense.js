@@ -1,4 +1,4 @@
-import * as Futil from "futil";
+import * as Futil from "../src/futil";
 
 /**
  * 
