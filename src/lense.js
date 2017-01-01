@@ -1,7 +1,15 @@
 import * as Futil from "../src/futil";
 
 /**
- * 
+ * Module implementing basic lense functionalities.
+ */
+
+/**
+ * Creates a property lense function.
+ * @param propName: A string value representing property name, or an array
+ * of string values representing path of nested property.
+ * @return A closure function that returns the property/properties
+ * given to it. 
  */
 export function prop(propName) {
     return function () {
@@ -9,6 +17,13 @@ export function prop(propName) {
     };
 }
 
+/**
+ * Reads a given object through a given property lense.
+ * @param propLense: A property lense function returning property name or
+ * a path to nested property.
+ * @param obj: Object to which the lense is applied.
+ * @return TODO
+ */
 export function read(propLense, obj) {
     var lense = propLense();
     var objClone = Futil.deepClone(obj);
@@ -37,8 +52,6 @@ export function write(propLense, obj, value) {
             previous = previous[current];
         return previous;
     }, objClone);
-    console.log(temp);
     temp = value;
-    console.log(temp);
     return objClone;
 }

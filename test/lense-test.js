@@ -51,6 +51,8 @@ describe("testing lense", () => {
         var nestedPropertyLense2 = Lense.prop(["prop3", "prop33"]);
         expect(Lense.read(nestedPropertyLense1, testObj)).equal(undefined);
         expect(Lense.read(nestedPropertyLense2, testObj)).equal(undefined);
+
+        // TODO: test for lense undefined and object undefined
     });
 
     it("checks that reading operation returns new instance", () => {
