@@ -32,14 +32,18 @@ export function read(propLense, obj) {
     var lense = propLense();
     var objClone = Futil.deepClone(obj);
     if (!Array.isArray(lense))
-        return objClone[lense];
-    lense.some((prop) => {
-        var isObject = Futil.isObject(objClone);
-        if (isObject)
-            objClone = objClone[prop];
-        return !isObject;
-    });
-    return objClone;
+        lense = [lense];
+    return readInner(lense, objClone);
+}
+
+function readInner(lense, obj) {
+    if (lense === undefined || obj === undefined)
+        return undefined;
+    if (lense.length === 0)
+        return obj;
+    obj = obj[lense[0]];
+    lense.shift();
+    return readInner(lense, obj);
 }
 
 /**
@@ -58,19 +62,21 @@ export function write(propLense, obj, value) {
         return undefined;
     var lense = propLense();
     var objClone = Futil.deepClone(obj);
-    if (!Array.isArray(lense)) {
-        objClone[lense] = value;
-        return objClone;
-    }
-    var temp = objClone;
-    var counter = 0;
-    for (counter = 0; counter < lense.length - 1; counter++) {
-        temp = temp[lense[counter]];
-        if (temp === undefined)
-            return undefined;
-    }
-    if (temp[lense[counter]] === undefined)
+    if (!Array.isArray(lense))
+        lense = [lense];
+    return writeInner(lense, objClone, value, objClone);
+}
+
+function writeInner(lense, obj, value, returnValue) {
+    if (lense === undefined || obj === undefined)
         return undefined;
-    temp[lense[counter]] = value;
-    return objClone;
+    if (lense.length === 0)
+        return undefined;
+    if (lense.length === 1) {
+        obj[lense[0]] = value;
+        return returnValue;
+    }
+    obj = obj[lense[0]];
+    lense.shift();
+    return writeInner(lense, obj, value, returnValue);
 }
