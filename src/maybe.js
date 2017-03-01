@@ -11,12 +11,8 @@ class Maybe {
         return new Nothing();
     }
 
-    static fromNullable(obj) {
-        return obj ? Maybe.just(obj) : Maybe.nothing();
-    }
-
     static of(obj) {
-        return Maybe.just(obj);
+        return obj ? Maybe.just(obj) : Maybe.nothing();
     }
 
     get isJust() {
@@ -43,7 +39,7 @@ class Just extends Maybe {
     }
 
     map(func) {
-        return Maybe.fromNullable(func(this._val));
+        return Maybe.of(func(this._val));
     }
 
     chain(func) {
