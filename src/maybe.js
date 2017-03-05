@@ -76,7 +76,7 @@ class Nothing extends Maybe {
         return other;
     }
     
-    isNothing() {
+    get isNothing() {
         return true;
     }
 }
