@@ -3,6 +3,10 @@
  */
 class Maybe {
 
+    constructor(val) {
+        this._val = val;
+    }
+
     static just(obj) {
         return new Just(obj);
     }
@@ -13,6 +17,10 @@ class Maybe {
 
     static of(obj) {
         return obj ? Maybe.just(obj) : Maybe.nothing();
+    }
+
+    get value() {
+        return this._val;
     }
 
     get isJust() {
@@ -30,8 +38,7 @@ class Maybe {
 class Just extends Maybe {
 
     constructor(val) {
-        super();
-        this._val = val;
+        super(val);
     }
 
     get value() {
@@ -46,7 +53,7 @@ class Just extends Maybe {
         return func(this._val);
     }
 
-    getOrElse() {
+    getOrElse(_) {
         return this._val;
     }
 
@@ -64,11 +71,11 @@ class Nothing extends Maybe {
         throw new TypeError("No value in Nothing");
     }
     
-    map(func) {
+    map(_) {
         return this;
     }
 
-    chain(func) {
+    chain(_) {
         return this;
     }
 

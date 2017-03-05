@@ -21,7 +21,7 @@ describe("testing Maybe monad", () => {
         expect(maybeNull instanceof Nothing).to.equal(true);
     });
 
-    it("value getter returns correct value", () => {
+    it("'value' getter returns correct value", () => {
         var maybe1 = Maybe.of("value");
         expect(maybe1.value).to.equal("value");
         var maybe2 = Maybe.of(null);
