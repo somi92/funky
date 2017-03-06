@@ -16,7 +16,7 @@ class Either {
     }
 
     static of(obj) {
-        return obj ? Maybe.right(obj) : Maybe.left(obj);
+        return obj ? Either.right(obj) : Either.left(obj);
     }
 
     get value() {
@@ -50,11 +50,7 @@ class Right extends Either {
     }
 
     getOrElse(_) {
-        this._val;
-    }
-
-    orElse(_) {
-        return this;
+        return this._val;
     }
 
     getOrElseThrow(_) {
@@ -99,10 +95,6 @@ class Left extends Either {
         return other;
     }
 
-    orElse(func) {
-        return func(this._val);
-    }
-
     getOrElseThrow(err) {
         throw new Error(err);
     }
@@ -115,3 +107,9 @@ class Left extends Either {
         return true;
     }
 }
+
+export {
+    Either,
+    Right,
+    Left
+};
