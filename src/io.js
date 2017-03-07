@@ -4,7 +4,7 @@
 class IO {
 
     constructor(effect) {
-        if (effect instanceof Function) {
+        if (!(effect instanceof Function)) {
             throw new Error('Function required for IO');
         }
         this.effect = effect;
@@ -26,7 +26,7 @@ class IO {
     }
 
     chain(func) {
-        return fn(this.effect());
+        return func(this.effect());
     }
 
     run() {
