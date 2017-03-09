@@ -4,31 +4,31 @@ import { spy } from "sinon";
 
 describe("testing Either monad", () => {
 
-    it("static method 'right' returns object of 'Right' type", function () {
+    it("static method 'right' returns instance of 'Right'", function () {
         var either = Either.right("value");
         expect(either instanceof Right).to.equal(true);
     });
 
-    it("static method 'left' returns object of 'Left' type", function () {
+    it("static method 'left' returns instance of 'Left'", function () {
         var either = Either.left("value");
         expect(either instanceof Left).to.equal(true);
     });
 
-    it("static method 'of' returns object of correct type", () => {
+    it("static method 'of' returns 'Right' or 'Left' depending on the value passed", () => {
         var eitherVal = Either.of("value");
         expect(eitherVal instanceof Right).to.equal(true);
         var eitherNull = Either.of(null);
         expect(eitherNull instanceof Left).to.equal(true);
     });
 
-    it("'value' getter returns correct value", () => {
+    it("'value' getter returns value from monad or throws error", () => {
         var either1 = Either.of("value");
         expect(either1.value).to.equal("value");
         var either2 = Either.of(null);
         assert.throws(() => { either2.value }, TypeError, "No value in Left");
     });
 
-    it("'map' method returns the correct object", () => {
+    it("'map' method applies the given function on monad value and returns wrapped result", () => {
         var either1 = Either.of(1);
         var func = (val) => val + 1;
         var res1 = either1.map(func);
@@ -40,7 +40,7 @@ describe("testing Either monad", () => {
         assert.throws(() => { either2.value }, TypeError, "No value in Left");
     });
 
-    it("'chain' method returns the correct object", () => {
+    it("'chain' method applies the given function on monad value and returns result", () => {
         var either1 = Either.of(1);
         var func = (val) => val + 1;
         var res1 = either1.chain(func);
@@ -52,7 +52,7 @@ describe("testing Either monad", () => {
         assert.throws(() => { either2.value }, TypeError, "No value in Left");
     });
 
-    it("'filter' method returns the correct object", () => {
+    it("'filter' method applies the given function on monad value and returns wrapped value or wrapped null depending on function result", () => {
         var either1 = Either.of(1);
         var func = (val) => val + 1;
         var funcNull = (val) => null;
@@ -68,7 +68,7 @@ describe("testing Either monad", () => {
         assert.throws(() => { res3.value }, TypeError, "No value in Left");
     });
 
-    it("'getOrElse' method returns the correct object", () => {
+    it("'getOrElse' method returns monad value or alternative object depending on monad type", () => {
         var either1 = Either.of(1);
         var res1 = either1.getOrElse();
         expect(res1 instanceof Either).to.equal(false);
@@ -79,7 +79,7 @@ describe("testing Either monad", () => {
         expect(res2).to.equal(100);
     });
 
-    it("'getOrElseThrow' method returns the correct object", () => {
+    it("'getOrElseThrow' method returns monad value or throws an error depending on monad type", () => {
         var either1 = Either.of(1);
         var res1 = either1.getOrElseThrow();
         expect(res1 instanceof Either).to.equal(false);
@@ -88,7 +88,7 @@ describe("testing Either monad", () => {
         assert.throws(() => { either2.getOrElseThrow("Error message") }, Error, "Error message");
     });
 
-    it("'isRight' getter returns boolean indicating if object is of Right type", () => {
+    it("'isRight' getter returns boolean indicating if monad is of Right type", () => {
         var either1 = Either.of(1);
         expect(either1 instanceof Right).to.equal(true);
         expect(either1.isRight).to.equal(true);
@@ -97,7 +97,7 @@ describe("testing Either monad", () => {
         expect(either2.isRight).to.equal(false);
     });
 
-    it("'isLeft' getter returns boolean indicating if object is of Left type", () => {
+    it("'isLeft' getter returns boolean indicating if monad is of Left type", () => {
         var either1 = Either.of(1);
         expect(either1 instanceof Left).to.equal(false);
         expect(either1.isLeft).to.equal(false);
