@@ -1,4 +1,4 @@
-import { Maybe, Just, Nothing } from "../src/maybe";
+import { Maybe, Just, Nothing } from "../../src/monads/maybe";
 import { expect, assert } from "chai";
 import { spy } from "sinon";
 

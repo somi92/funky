@@ -10,7 +10,7 @@ var sequence = require('gulp-sequence');
 var del = require('del');
 
 gulp.task('test', function () {
-    gulp.src('test/*-test.js', { read: false })
+    gulp.src('test/**/*-test.js', { read: false })
         .pipe(mocha({
             compilers: {
                 js: babelRegister
@@ -23,7 +23,7 @@ gulp.task('test', function () {
 });
 
 gulp.task('scripts', function () {
-    gulp.src('src/*.js')
+    gulp.src('src/**/*.js')
         .pipe(babel({
             presets: ['es2015']
         }))
@@ -37,7 +37,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch('{src/*.js,test/*.js}', ['test']);
+    gulp.watch('{src/**/*.js,test/**/*.js}', ['test']);
 });
 
 gulp.task('build-dev', sequence('test'));

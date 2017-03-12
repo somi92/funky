@@ -1,4 +1,4 @@
-import * as Flow from "../src/flow";
+import * as Flow from "../../src/flow/flow";
 import { expect } from "chai";
 import { spy } from "sinon";
 

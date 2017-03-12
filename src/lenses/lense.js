@@ -1,4 +1,4 @@
-import * as Futil from "../src/futil";
+import * as Futil from "../../src/futil";
 
 /**
  * Module implementing basic lense functionalities.

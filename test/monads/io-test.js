@@ -1,4 +1,4 @@
-import { IO } from "../src/io";
+import { IO } from "../../src/monads/io";
 import { expect, assert } from "chai";
 import { spy } from "sinon";
 

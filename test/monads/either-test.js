@@ -1,4 +1,4 @@
-import { Either, Right, Left } from "../src/either";
+import { Either, Right, Left } from "../../src/monads/either";
 import { expect, assert } from "chai";
 import { spy } from "sinon";
 

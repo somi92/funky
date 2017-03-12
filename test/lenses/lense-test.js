@@ -1,4 +1,4 @@
-import * as Lense from "../src/lense";
+import * as Lense from "../../src/lenses/lense";
 import { expect } from "chai";
 
 const testObj = {
