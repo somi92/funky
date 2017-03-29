@@ -23,7 +23,7 @@ gulp.task('test', function () {
 });
 
 gulp.task('scripts', function () {
-    gulp.src('src/**/*.js')
+    gulp.src(['src/**/*.js', '!src/examples/*.js'])
         .pipe(babel({
             presets: ['es2015']
         }))

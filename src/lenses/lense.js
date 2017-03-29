@@ -1,5 +1,3 @@
-import * as Futil from "../../src/futil";
-
 /**
  * Module implementing basic lense functionalities.
  */
@@ -30,7 +28,7 @@ export function read(propLense, obj) {
     if (propLense === undefined || obj === undefined)
         return undefined;
     var lense = propLense();
-    var objClone = Futil.deepClone(obj);
+    var objClone = deepClone(obj);
     if (!Array.isArray(lense))
         lense = [lense];
     return readInner(lense, objClone);
@@ -61,7 +59,7 @@ export function write(propLense, obj, value) {
     if (propLense === undefined || obj === undefined)
         return undefined;
     var lense = propLense();
-    var objClone = Futil.deepClone(obj);
+    var objClone = deepClone(obj);
     if (!Array.isArray(lense))
         lense = [lense];
     return writeInner(lense, objClone, value, objClone);
@@ -79,4 +77,10 @@ function writeInner(lense, obj, value, returnValue) {
     obj = obj[lense[0]];
     lense.shift();
     return writeInner(lense, obj, value, returnValue);
+}
+
+function deepClone(obj) {
+    if (obj === undefined || obj === null)
+        return undefined;
+    return JSON.parse(JSON.stringify(obj));
 }
