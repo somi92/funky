@@ -5,7 +5,7 @@ var getGrades = function (student) {
     return Funky.read(Funky.prop("grades"), student);
 };
 
-function calculateAverage(arr) {
+var calculateAverage = function (arr) {
     var sum = 0;
     arr.forEach(function (e) {
         sum += e;
@@ -22,7 +22,8 @@ function calculateAverageGrade(student) {
 }
 
 function demoMaybeMonad() {
-    console.log("Maybe monad provides null tolerant processing pipeline. Null checking is provided out of the box.\n");
+    console.log("Maybe monad provides null tolerant processing pipeline. Null checking is provided automatically for wrapped values,");
+    console.log("there is no need to use 'if' statements.\n");
     console.log("\nCalculate average grade for a given student: ");
     console.log("\tName: " + Student.name);
     var grades = "";
