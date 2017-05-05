@@ -49,7 +49,7 @@ class Right extends Either {
         return Either.of(func(this._val) ? this._val : null);
     }
 
-    orElse() {
+    orElse(_) {
         return this;
     }
 
