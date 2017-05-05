@@ -49,6 +49,10 @@ class Right extends Either {
         return Either.of(func(this._val) ? this._val : null);
     }
 
+    orElse() {
+        return this;
+    }
+
     getOrElse(_) {
         return this._val;
     }
@@ -89,6 +93,10 @@ class Left extends Either {
 
     filter(_) {
         return this;
+    }
+
+    orElse(f) {
+        return f(this._val);
     }
 
     getOrElse(other) {

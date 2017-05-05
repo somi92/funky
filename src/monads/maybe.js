@@ -57,6 +57,10 @@ class Just extends Maybe {
         return this._val;
     }
 
+    filter(f) {
+        return Maybe.of(f(this._val) ? this._val : null);
+    }
+
     get isJust() {
         return true;
     }
@@ -70,7 +74,7 @@ class Nothing extends Maybe {
     get value() {
         throw new TypeError("No value in Nothing");
     }
-    
+
     map(_) {
         return this;
     }
@@ -82,7 +86,11 @@ class Nothing extends Maybe {
     getOrElse(other) {
         return other;
     }
-    
+
+    filter(f) {
+        return this;
+    }
+
     get isNothing() {
         return true;
     }

@@ -63,6 +63,22 @@ describe("testing Maybe monad", () => {
         expect(res2).to.equal(100);
     });
 
+    it("'filter' method applies the given function on monad value and returns wrapped value or wrapped null depending on function result", () => {
+        var maybe1 = Maybe.of(1);
+        var func = (val) => val + 1;
+        var funcNull = (val) => null;
+        var res1 = maybe1.filter(func);
+        expect(res1 instanceof Just).to.equal(true);
+        expect(res1.value).to.equal(1);
+        var res2 = maybe1.filter(funcNull);
+        expect(res2 instanceof Nothing).to.equal(true);
+        assert.throws(() => { res2.value }, TypeError, "No value in Nothing");
+        var maybe3 = Maybe.of(null);
+        var res3 = maybe3.filter(func);
+        expect(res3 instanceof Nothing).to.equal(true);
+        assert.throws(() => { res3.value }, TypeError, "No value in Nothing");
+    });
+
     it("'isJust' getter returns boolean indicating if monad is of Just type", () => {
         var maybe1 = Maybe.of(1);
         expect(maybe1 instanceof Just).to.equal(true);

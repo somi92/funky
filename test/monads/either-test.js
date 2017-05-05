@@ -68,6 +68,17 @@ describe("testing Either monad", () => {
         assert.throws(() => { res3.value }, TypeError, "No value in Left");
     });
 
+    it("'orElse' method returns the monad itself or applies a given function to its value", () => {
+        var either1 = Either.of(1);
+        var res1 = either1.orElse((v) => v + 1);
+        expect(res1 instanceof Right).to.equal(true);
+        expect(res1.value).to.equal(1);
+        var either2 = Either.of(null);
+        var res2 = either2.orElse((v) => "result " + v);
+        expect(res2 instanceof Either).to.equal(false);
+        expect(res2).to.equal("result null");
+    });
+
     it("'getOrElse' method returns monad value or alternative object depending on monad type", () => {
         var either1 = Either.of(1);
         var res1 = either1.getOrElse();
