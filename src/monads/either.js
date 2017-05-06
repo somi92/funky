@@ -15,8 +15,12 @@ class Either {
         return new Left(obj);
     }
 
-    static of(obj) {
+    static fromNullable(obj) {
         return obj ? Either.right(obj) : Either.left(obj);
+    }
+
+    static of(obj) {
+        return Either.right(obj);
     }
 
     get value() {
@@ -38,7 +42,7 @@ class Right extends Either {
     }
 
     map(func) {
-        return Either.of(func(this._val));
+        return Either.fromNullable(func(this._val));
     }
 
     chain(func) {
@@ -46,7 +50,7 @@ class Right extends Either {
     }
 
     filter(func) {
-        return Either.of(func(this._val) ? this._val : null);
+        return Either.fromNullable(func(this._val) ? this._val : null);
     }
 
     orElse(_) {
