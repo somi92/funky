@@ -15,26 +15,27 @@ var calculateAverage = function (arr) {
 
 function calculateAverageGrade(student) {
     return Funky.Maybe
-        .of(student)
+        .fromNullable(student)
         .map(getGrades)
         .map(calculateAverage)
         .getOrElse("Cannot calculate average grade, null value provided");
 }
 
+/**
+ * Maybe monad provides null tolerant processing pipeline. Null checking is provided automatically for wrapped values,
+ * there is no need to use 'if' statements.
+ */
 function demoMaybeMonad() {
-    console.log("Maybe monad provides null tolerant processing pipeline. Null checking is provided automatically for wrapped values,");
-    console.log("there is no need to use 'if' statements.\n");
-    console.log("\nCalculate average grade for a given student: ");
-    console.log("\tName: " + Student.name);
-    var grades = "";
-    Student.grades.forEach(function (e) {
-        grades += " " + e;
-    });
-    console.log("\tGrades: " + grades);
-    console.log("\tAverage grade: " + calculateAverageGrade(Student));
-    console.log("\nCalculate average grade for a null student: ");
-    console.log("\t" + calculateAverageGrade(null));
-    console.log("--------------------------------------------------------------------------------------------------------");
+    /**
+     * Calculate average grade for a given student
+     */
+    var gradeAverage = calculateAverageGrade(Student);
+    console.log(gradeAverage);
+    /**
+     * Calculate average grade for a null student
+     */
+    var gradeAverageNull = calculateAverageGrade(null);
+    console.log(gradeAverageNull);
 }
 
 demoMaybeMonad();

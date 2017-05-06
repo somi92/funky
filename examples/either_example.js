@@ -1,46 +1,46 @@
 var Funky = require("./../dist/funky.min");
 var Student = require("./student");
 
-var getGrades = function (student) {
-    return Funky.read(Funky.prop("grades"), student);
-};
-
-var calculateAverage = function (arr) {
-    var sum = 0;
-    arr.forEach(function (e) {
-        sum += e;
-    });
-    return sum / arr.length;
+var mockStudentService = function (id) {
+    return Student;
 }
 
-function calculateAverageGrade(student) {
-    return Funky.Either
-        .of(student)
-        .map(getGrades)
-        .map(calculateAverage)
-        .map((val) => "\t\t" + val)
-        .map(Funky.tap(console.log))
-        .orElse((value) => {
-            console.log("\tError calculating grade average, object value: " + value);
-        });
+var mockNullStudentService = function (id) {
+    return null;
 }
 
+var mockExceptionStudentService = function (id) {
+    throw new Error("Could not reach the server");
+}
+
+var logger = function(message) {
+    return Funky.tap(console.log)(message);
+}
+
+function fetchStudent(service, id) {
+    try {
+        return Funky.Either.fromNullable(service(id));
+    } catch (e) {
+        return Funky.Either.left(e.message);
+    }
+}
+
+/**
+ * Either monad is used to wrap computations that may fail and provide additional information about the failure.
+ */
 function demoEitherMonad() {
-    console.log("Either monad is used to wrap computations that may fail and provide additional information about the failure.");
-    console.log("\n");
-    console.log("\nCalculate average grade for a given student: ");
-    console.log("\tName: " + Student.name);
-    var grades = "";
-    Student.grades.forEach(function (e) {
-        grades += " " + e;
-    });
-    console.log("\tGrades: " + grades);
-    console.log("\tAverage grade: ");
-    calculateAverageGrade(Student);
-    Student.grades = null;
-    console.log("\nCalculate average grade for a student with null grades: ");
-    calculateAverageGrade(Student);
-    console.log("--------------------------------------------------------------------------------------------------------");
+    /**
+     * Fetch the student from a service
+     */
+    fetchStudent(mockStudentService, 100).map(logger).orElse(console.log);
+    /**
+     * Fetch the student from a service that will return null
+     */
+    fetchStudent(mockNullStudentService, 100).map(logger).orElse(console.log);
+    /**
+     * Fetch the student from a service that will fail due to network issue
+     */
+    fetchStudent(mockExceptionStudentService, 100).map(logger).orElse(console.log);
 }
 
 demoEitherMonad();
