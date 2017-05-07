@@ -22,15 +22,15 @@ function calculateAverageGrade(student) {
 }
 
 /**
- * Maybe monad provides null tolerant processing pipeline. Null checking is provided automatically for wrapped values,
- * there is no need to use 'if' statements.
+ * Maybe monad handles nullable values and enables the creation of null tolerant processing pipeline. 
+ * Null checking logic is provided automatically, there is no need to use 'if' statements.
  */
 function demoMaybeMonad() {
     /**
      * Calculate average grade for a given student
      */
     var gradeAverage = calculateAverageGrade(Student);
-    console.log(gradeAverage);
+    console.log("Average grade: " + gradeAverage);
     /**
      * Calculate average grade for a null student
      */
