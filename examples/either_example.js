@@ -1,8 +1,8 @@
 var Funky = require("./../dist/funky.min");
-var Student = require("./student");
+var Students = require("./student");
 
 var mockStudentService = function (id) {
-    return Student;
+    return Students.filter(e => e.id == id)[0];
 }
 
 var mockNullStudentService = function (id) {
@@ -23,8 +23,12 @@ var printReport = function (student) {
     })(student);
 }
 
+var getName = function (student) {
+    return Funky.read(Funky.prop("name"), student);
+};
+
 var logError = function (message) {
-    return Funky.tap(console.log)("Error >> " + message + "\n");
+    return Funky.tap(console.log)("ERROR LOG >> " + message + "\n");
 }
 
 function fetchStudent(service, id) {
@@ -37,20 +41,24 @@ function fetchStudent(service, id) {
 
 /**
  * Either monad is used to wrap computations that may fail and provide additional information about the failure.
+ * It represents the logical disjunction between Left and Right side, with bias on the Right side (used for wrapping
+ * successful computation results, Left side used for errors). The Left side can also be mapped over with a function
+ * or can throw an exception.
  */
 function demoEitherMonad() {
     /**
-     * Fetch the student from a service
+     * Fetch the student from a service and print report
      */
     fetchStudent(mockStudentService, 100).map(printReport).orElse(logError);
     /**
-     * Fetch the student from a service that will return null
-     */
-    fetchStudent(mockNullStudentService, 100).map(printReport).orElse(logError);
-    /**
-     * Fetch the student from a service that will fail due to network issue
+     * Fetch the student from a service that will fail due to network issue and log an error
      */
     fetchStudent(mockExceptionStudentService, 100).map(printReport).orElse(logError);
+    /**
+     * Fetch the student from a service that will return null and throw an exception
+     */
+    var name = fetchStudent(mockNullStudentService, 100).map(getName).getOrElseThrow("Cannot get student name, data not found");
+    console.log(name);
 }
 
 demoEitherMonad();

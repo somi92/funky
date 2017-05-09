@@ -1,5 +1,5 @@
 var Funky = require("./../dist/funky.min");
-var Student = require("./student");
+var Students = require("./student");
 
 var getGrades = function (student) {
     return Funky.read(Funky.prop("grades"), student);
@@ -29,7 +29,7 @@ function demoMaybeMonad() {
     /**
      * Calculate average grade for a given student
      */
-    var gradeAverage = calculateAverageGrade(Student);
+    var gradeAverage = calculateAverageGrade(Students[0]);
     console.log("Average grade: " + gradeAverage);
     /**
      * Calculate average grade for a null student
