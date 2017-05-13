@@ -20,13 +20,14 @@ var upgradeYear = function (student) {
 }
 
 /**
- * TODO description
+ * IO monad wraps a function with side effects making it possible to chain together pure and impure
+ * computations and executing them in one step.  
  */
 function demoIOMonad() {
-    console.log(mockStorage[0]);
-    console.log();
-    Funky.IO.from(getStudentFromStorage(100)).map(upgradeYear).map(saveStudentToStorage).run();
-    console.log(mockStorage[0]);
+    console.log("Year: " + mockStorage[0].year);
+    var updateComputation = Funky.IO.from(getStudentFromStorage(100)).map(upgradeYear).map(saveStudentToStorage);
+    updateComputation.run();
+    console.log("Year: " + mockStorage[0].year);
 }
 
 demoIOMonad();
